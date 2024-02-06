@@ -5,12 +5,12 @@
 class Codemetagenerator < Formula
   desc "A CodeMeta project description generator written in Go."
   homepage "https://angstrom.io/codemetagenerator"
-  version "0.47.13"
+  version "0.47.14"
   license "Apache-2.0"
 
   on_macos do
-    url "https://github.com/cacoco/codemetagenerator/releases/download/v0.47.13/codemetagenerator_Darwin_all.tar.gz", using: CurlDownloadStrategy
-    sha256 "a52c98696a1f03a1bc82ba6c93406d063f6bd1cbd76a9d8cfdbdd6e2cd78e0cf"
+    url "https://github.com/cacoco/codemetagenerator/releases/download/v0.47.14/codemetagenerator_Darwin_all.tar.gz", using: CurlDownloadStrategy
+    sha256 "e468aa4873a8b27231528234d7ade4149486d6024f43df99c7d3cfdaebaa1e26"
 
     def install
       bin.install "codemetagenerator"
@@ -18,25 +18,25 @@ class Codemetagenerator < Formula
   end
 
   on_linux do
+    if Hardware::CPU.arm? && !Hardware::CPU.is_64_bit?
+      url "https://github.com/cacoco/codemetagenerator/releases/download/v0.47.14/codemetagenerator_Linux_armv7.tar.gz", using: CurlDownloadStrategy
+      sha256 "e087006862bc9df0cb89cca013fa557893365aec24e62e13892a5f88d53a14b6"
+
+      def install
+        bin.install "codemetagenerator"
+      end
+    end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/cacoco/codemetagenerator/releases/download/v0.47.13/codemetagenerator_Linux_arm64.tar.gz", using: CurlDownloadStrategy
-      sha256 "ef4e51ed505934c1f2e705063ad6df1878a23a46cf95bc7aea2f33976d5563ad"
+      url "https://github.com/cacoco/codemetagenerator/releases/download/v0.47.14/codemetagenerator_Linux_arm64.tar.gz", using: CurlDownloadStrategy
+      sha256 "b5729106d7b17cc0eec2fe7d1ce02fab4a93232c80ae2f9da923b3992c2a50da"
 
       def install
         bin.install "codemetagenerator"
       end
     end
     if Hardware::CPU.intel?
-      url "https://github.com/cacoco/codemetagenerator/releases/download/v0.47.13/codemetagenerator_Linux_x86_64.tar.gz", using: CurlDownloadStrategy
-      sha256 "bf7dd5358756711a80241c5e9ae586bafdea40388e13d6cfa07d2d41d5949ca6"
-
-      def install
-        bin.install "codemetagenerator"
-      end
-    end
-    if Hardware::CPU.arm? && !Hardware::CPU.is_64_bit?
-      url "https://github.com/cacoco/codemetagenerator/releases/download/v0.47.13/codemetagenerator_Linux_armv7.tar.gz", using: CurlDownloadStrategy
-      sha256 "85965deed6bff61c5388b10bece6a17bb31f7e699ee474b1a1ecd2f385a8b0c3"
+      url "https://github.com/cacoco/codemetagenerator/releases/download/v0.47.14/codemetagenerator_Linux_x86_64.tar.gz", using: CurlDownloadStrategy
+      sha256 "46365acd4b0b451918d164ed114dc147fd49634c49d206a10bd97761a501533a"
 
       def install
         bin.install "codemetagenerator"
